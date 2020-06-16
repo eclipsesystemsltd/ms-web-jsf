@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+    version="2.0">
+ 
+    <!-- JSF and Spring are integrated -->
+    <application>
+        <el-resolver>
+            org.springframework.web.jsf.el.SpringBeanFacesELResolver
+        </el-resolver>
+        
+        <message-bundle>messages</message-bundle>
+        <resource-bundle>
+        	<base-name>messages</base-name>
+        	<var>msgs</var>
+        </resource-bundle>
+    </application>
+
+	<lifecycle>
+		<phase-listener>uk.co.meridenspares.web.jsf.listeners.ForceLoginPhaseListener</phase-listener>
+	</lifecycle>
+	
+	<managed-bean>
+		<managed-bean-name>indexBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.IndexPageBean</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>confirmationBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.ConfirmationBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>userBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.UserBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+    <!-- Used to hold current customer -->
+	<managed-bean>
+		<managed-bean-name>customerBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.CustomerBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>contactBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.ContactBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>contactService</property-name>
+			<value>#{contactService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>modelBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.ModelBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>modelService</property-name>
+			<value>#{modelService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>modelSelectorBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.ModelSelectorBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>modelService</property-name>
+			<value>#{modelService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>sectionBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.SectionBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>sectionService</property-name>
+			<value>#{sectionService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>basketBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.BasketBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>basketService</property-name>
+			<value>#{basketService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>customerAccountBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.CustomerAccountBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>customerService</property-name>
+			<value>#{customerService}</value>
+		</managed-property>
+	</managed-bean>
+    
+	<managed-bean>
+		<managed-bean-name>loginBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.LoginBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>authenticationService</property-name>
+			<value>#{authenticationService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>customerService</property-name>
+			<value>#{customerService}</value>
+		</managed-property>
+		<managed-property>
+			<property-name>customerBean</property-name>
+			<value>#{customerBean}</value>
+		</managed-property>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>paymentBean</managed-bean-name>
+		<managed-bean-class>uk.co.meridenspares.web.jsf.bean.PaymentBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+
+	<application>
+		<resource-bundle>
+			<base-name>uk.co.meridenspares.web.jsf.i18n.messages</base-name>
+			<var>msgs</var>
+		</resource-bundle>
+	</application>
+
+    <!-- configuration of navigation rules -->
+    <!-- navigation-rule>
+        <from-view-id>/views/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/views/success.xhtml</to-view-id>
+        </navigation-case>
+         <navigation-case>
+            <from-outcome>error</from-outcome>
+            <to-view-id>/views/error.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule -->
+    <navigation-rule>
+        <from-view-id>/onlineparts2.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/models.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/models.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>login</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/login.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/basket.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>confirm</from-outcome>
+            <to-view-id>/confirm.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/payment.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>paymentResult</from-outcome>
+            <to-view-id>/paymentResult.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registrationYearPopup</from-outcome>
+            <to-view-id>/registrationYearPopup.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+ 
+</faces-config>

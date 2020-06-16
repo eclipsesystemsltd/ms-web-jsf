@@ -1,0 +1,45 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h1>Enter Payment Information</h1>
+				<h:panelGrid columns="3">
+					Amount
+					<h:inputText id="amount" label="Amount" value="#{paymentBean.amount}" required="true">
+						<f:convertNumber minFractionDigits="2"/>
+						<f:validateDoubleRange minimum="10" maximum="10000"/>
+					</h:inputText>
+					<h:message for="amount"/>
+	
+					Credit Card
+					<h:inputText id="card" label="Credit Card" value="#{paymentBean.card}"
+														requiredMessage="Credit card number required">
+						<f:validateRequired/>
+						<f:validateLength minimum="13"/>
+						<f:converter converterId="creditCardConverter"/>
+						<f:validator validatorId="creditCardValidator"/>
+					</h:inputText>
+					<h:message for="card"/>
+					
+					Expiration Date
+					<h:inputText id="date" label="Date" value="#{paymentBean.date}">
+						<f:convertDateTime pattern="MM/yyyy"/>
+						<f:validateRequired/>
+					</h:inputText>
+					<h:message for="date"/>
+				</h:panelGrid>
+				<h:commandButton value="Process Payment" action="paymentResult"/>
+				<h:commandButton value="Cancel Payment" action="paymentCancelled" immediate="true"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>

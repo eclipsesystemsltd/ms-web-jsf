@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h3>Create customer account</h3>
+			<h:form>
+				<table>
+					<tr>
+						<td>
+							<h:outputText value="Title" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="title" value="#{customerAccountBean.title}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="title"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="First Name" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="firstName" value="#{customerAccountBean.firstName}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="firstName"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Last Name" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="lastName" value="#{customerAccountBean.lastName}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="lastName"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="First Line of Address" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="addressFirstLine" value="#{customerAccountBean.addressFirstLine}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="addressFirstLine"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Second Line of Address" escape="false" />
+						</td>
+						<td>
+							<h:inputText value="#{customerAccountBean.addressSecondLine}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Town" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="town" value="#{customerAccountBean.town}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="town"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="County" escape="false" />
+						</td>
+						<td>
+							<h:inputText value="#{customerAccountBean.county}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Post Code" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="postcode" value="#{customerAccountBean.postcode}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="postcode"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Mobile Number" escape="false" />
+						</td>
+						<td>
+							<h:inputText value="#{customerAccountBean.mobile}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Phone Number" escape="false" />
+						</td>
+						<td>
+							<h:inputText value="#{customerAccountBean.phone}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Email" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="email" value="#{customerAccountBean.email}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="email"/>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<h:outputText value="Password" escape="false" />
+						</td>
+						<td>
+							<h:inputText id="password" value="#{customerAccountBean.password}" required="true">
+								<f:validateLength minimum="2"/>
+							</h:inputText>
+							<h:message for="password"/>
+						</td>
+					</tr>
+				</table>
+				
+				<h:commandButton value="Create Account" action="#{customerAccountBean.createAccount}" />
+			</h:form>
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>

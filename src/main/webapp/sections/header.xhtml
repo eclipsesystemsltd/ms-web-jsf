@@ -1,0 +1,41 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition>
+		<div class="heading">
+			#{msgs['header.title']}
+			<h:outputText value="  " escape="false" />
+			Welcome 
+			#{customerBean.customer.title}<h:outputText value="  " escape="false" />
+			#{customerBean.customer.firstName}<h:outputText value="  " escape="false" />
+			#{customerBean.customer.lastName}
+
+			<table>
+				<tr>
+					<td>
+						<h:outputLink value="index.xhtml" styleClass="headerLinkStyle">Home</h:outputLink>				
+					</td>
+					<td>
+						<h:outputLink value="createAccount.xhtml" styleClass="headerLinkStyle">Create Account</h:outputLink>
+					</td>
+					<td>
+						<h:form>
+							<h:commandLink action="#{loginBean.toggle}" styleClass="headerLinkStyle">#{loginBean.displayTag}</h:commandLink>
+						</h:form>
+					</td>
+					<td>
+						<h:outputLink value="basket.xhtml" styleClass="headerLinkStyle">View Basket</h:outputLink>
+					</td>
+				</tr>
+			</table>
+			
+		</div>
+	</ui:composition>
+</h:body>
+</html>

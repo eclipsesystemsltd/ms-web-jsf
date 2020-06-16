@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h:form>
+				<h1>Payment Information</h1>
+				<h:panelGrid columns="2">
+					Amount
+					<h:outputText value="#{paymentBean.amount}">
+						<f:convertNumber type="currency"/>
+					</h:outputText>
+	
+					Credit Card
+					<h:outputText value="#{paymentBean.card}">
+					</h:outputText>
+					
+					Expiration Date
+					<h:outputText value="#{paymentBean.date}">
+						<f:convertDateTime pattern="MM/yyyy"/>
+					</h:outputText>
+					<h:message for="amount"/>
+				</h:panelGrid>
+				<h:commandButton value="Back" action="index"/>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

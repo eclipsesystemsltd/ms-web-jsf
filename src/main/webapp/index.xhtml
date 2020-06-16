@@ -1,0 +1,42 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+		
+			<script>
+				function openNewWindow() {
+					window.open('#{facesContext.externalContext.requestContextPath}/registrationYearPopup.xhtml',
+													'MyWindow', 'dependent=yes, menubar=no, toolbar=no');
+					return false;
+				}
+			</script>
+			
+			<h3>#{msgs.welcome}</h3>
+			
+			<h:form id="utilityPopups">
+				<!-- First way of calling pop-up using target attribute -->
+				<h:commandLink target="registrationYearPopup" action="#{indexBean.actionRegistrationYearPopup}" value="Number plate to year"/>
+			
+				<!-- Second way of calling pop-up using onclick event and window.open call -->
+				<h:outputLink  value="#"
+					onclick="window.open('frameNumberPopup.xhtml', 'MyWindow', 'dependent=yes, menubar=no, toolbar=no'); return false;">
+					<h:outputText value="Engine/frame number to year"/>
+				</h:outputLink>
+			
+				<!-- Third approach to calling pop-up by putting Javascript into a function -->
+				<h:outputLink onclick="openNewWindow();">
+					<h:outputText value="Part number format converter"/>
+				</h:outputLink>
+			</h:form>
+			
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>

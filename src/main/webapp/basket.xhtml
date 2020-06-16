@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h3>Shopping basket</h3>
+			<h:dataTable value="#{basketBean.items}" var="basketItem"
+							styleClass="parts" headerClass="partsHeader" columnClasses="firstColumn.secondColumn">
+				<f:facet name="caption">A list of parts</f:facet>
+						
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Part Number</f:facet>
+					#{basketItem.stockItem.partNumber}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Description</f:facet>
+					#{basketItem.stockItem.description}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Quantity</f:facet>
+					#{basketItem.quantity}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<h:form>
+						<h:commandLink action="#{basketBean.removeItem(basketItem)}">Change quantity</h:commandLink>
+					</h:form>
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<h:form>
+						<h:commandLink action="#{basketBean.removeItem(basketItem)}">Remove</h:commandLink>
+					</h:form>
+				</h:column>				
+			</h:dataTable>
+ 
+			<h:form>
+				<h:commandButton value="Checkout" action="#{basketBean.checkout}" />
+			</h:form>
+
+
+			<p:dialog id="confirmationDialog" header="Basic Dialog" widgetVar="confirmationDialog">  
+    			<p:outputPanel id="dialogPanel">
+	    			<h:outputText id="confirmationMsg" value="Order: #{confirmationBean.message}" />  
+					<h:form>
+						<p:commandButton value="OK" onclick="confirmationDialog.hide();" />
+						<p:commandButton value="Refresh" update=":confirmationMsg" />
+					</h:form>
+				</p:outputPanel>
+			</p:dialog>  
+ 
+			<h:form>
+				<p:commandButton value="Confirm1" onclick="confirmationDialog.show()"
+					actionListener="#{confirmationBean.confirm}" />
+			</h:form>
+			
+			
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>

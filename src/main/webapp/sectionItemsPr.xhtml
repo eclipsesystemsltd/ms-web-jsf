@@ -1,0 +1,63 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+		    <f:metadata>
+		        <f:viewParam name="id" value="#{sectionBean.id}" />
+		    </f:metadata>
+			<h3>List of parts for #{modelBean.year} #{modelBean.name} #{sectionBean.section.title}</h3>
+			<p:dataTable id='sectionItems' value="#{sectionBean.parts}" var="item"
+							styleClass="parts" headerClass="partsHeader" columnClasses="firstColumn.secondColumn"
+							paginator='true' rows='10' lazy='false'>
+				<f:facet name="caption">A list of parts</f:facet>
+						
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Ref</f:facet>
+					#{item.ref}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Part Number</f:facet>
+					#{item.partNumber}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Description</f:facet>
+					#{item.description}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Quantity</f:facet>
+					#{item.quantity}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Items In Basket</f:facet>
+					<f:ajax render="q1">
+					<h:form prependId="false">
+						<h:outputText id="q1" value="#{basketBean.getBasketQuantity(item)}"/>
+						<h:outputText value="   "/>
+						<h:commandLink action="#{basketBean.addItem(item)}">+1</h:commandLink>
+						<h:outputText value="   "/>
+						<h:commandLink action="#{basketBean.removeItem(item)}">-1</h:commandLink>
+					</h:form>
+					</f:ajax>
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Add to basket</f:facet>
+					<h:form>
+						<h:selectOneMenu value="#{basketBean.numberInBasket(item)}" onchange="submit()"
+														valueChangeListener="#{basketBean.changeCurrentItem}">
+				   			<f:selectItems value="#{basketBean.availableItems(item)}"/>
+						</h:selectOneMenu>
+					</h:form>
+				</h:column>
+			</p:dataTable>
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>

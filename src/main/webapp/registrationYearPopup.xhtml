@@ -1,0 +1,38 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>Registration Year Calculator</title>
+	
+	<script type="text/javascript">
+		function convertRegistrationNumber(){
+			var reg = document.getElementById('registrationYearFormId:registrationYearInputId').value;
+			document.getElementById("registrationYearOutputId").innerHTML="sssssss";
+		}
+	</script>
+	
+</h:head>
+
+<h:body>
+	<h3>Registration Year Calculator</h3>
+
+	<p>	
+	Between the years 1962 and 1983 the last letter of the registration number indicated the year of
+	registration. Registration numbers consisted of three letters followed by two or three numbers and a letter, e.g.
+	ABC 123F. 
+	</p>
+	<p>
+	The registration year corresponds approximately to Triumph's model year but because motorcycles could be registered well
+	after manufacture the registration number is only a guide to the year of manufacture.
+	</p>
+
+	<h:form id="registrationYearFormId">
+		<span>Enter registration number: <h:inputText id="registrationYearInputId" size="10"/>
+		<h:commandButton id="registrationYearButtonId" value="Get Year" onclick="convertRegistrationNumber();"/></span>
+		<br/>
+		Year of registration: <div id="registrationYearOutputId"></div>
+	</h:form>
+	
+</h:body>
+</html>

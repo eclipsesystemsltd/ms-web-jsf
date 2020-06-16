@@ -1,0 +1,115 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h3>#{msgs.welcome}</h3>
+			<h:form id="onlinePartsForm">
+			    <h:panelGrid columns="2">
+			        <P><h:outputText value="Select model type, year, model and section" /></P>
+					<h:panelGroup>
+						<h:selectOneMenu id="onlinePartsModelRangeMenu"
+							converter="modelRangeConverter"
+							onchange="this.form.submit();"
+							valueChangeListener="#{modelSelectorBean.changeModelRangeMenu}"
+							binding="#{modelSelectorBean.modelRangeMenu}"
+							immediate="true">
+							<f:selectItem itemLabel="Select model range" />
+							<f:selectItems value="#{modelSelectorBean.modelRangeItems}" />
+							<f:converter converterId="modelRangeConverter"/>
+						</h:selectOneMenu>
+	            
+			            <h:selectOneMenu id="onlinePartsYearMenu"
+			                onchange="this.form.submit();"
+			                valueChangeListener="#{modelSelectorBean.changeModelYearMenu}"
+			                rendered="#{modelSelectorBean.modelRangeMenu.value != null}"
+			                binding="#{modelSelectorBean.modelYearMenu}"
+			                converter="javax.faces.Integer"
+			                immediate="true">
+			                <f:selectItem itemLabel="Select model year" />
+			                <f:selectItems value="#{modelSelectorBean.modelYearItems}" />
+							<f:convertNumber integerOnly="true" />
+						</h:selectOneMenu>
+			             
+						<h:selectOneMenu id="onlinePartsModelMenu"
+							onchange="this.form.submit();"
+							valueChangeListener="#{modelSelectorBean.changeModelMenu}"
+							rendered="#{modelSelectorBean.modelYearMenu.value != null}"
+							binding="#{modelSelectorBean.modelMenu}"
+							immediate="true">
+							<f:selectItem itemLabel="Select model" />
+							<f:selectItems value="#{modelSelectorBean.modelItems}" />
+						</h:selectOneMenu>
+			           
+						<h:selectOneMenu id="onlinePartsSectionMenu"
+							onchange="this.form.submit();"
+							valueChangeListener="#{modelSelectorBean.changeSectionMenu}"
+							rendered="#{modelSelectorBean.modelMenu.value != null}"
+			                binding="#{modelSelectorBean.sectionMenu}"
+			                immediate="true">
+			                <f:selectItem itemLabel="Select section" />
+			                <f:selectItems value="#{modelSelectorBean.sectionItems}" />
+						</h:selectOneMenu>
+						
+						<h:commandButton value="Submit" action="#{modelSelectorBean.submit}" />
+		            
+						<h:inputHidden required="#{modelSelectorBean.sectionMenu.value == null}"
+												requiredMessage="Need to select range/year/model/section." />
+					</h:panelGroup>
+		
+				</h:panelGrid>
+			
+				<h:messages infoStyle="color: green;" errorStyle="color: red;" />
+			</h:form>
+			<h:dataTable rendered="#{modelSelectorBean.sectionSelected}" value="#{modelSelectorBean.parts}" var="item"
+							styleClass="parts" headerClass="partsHeader" columnClasses="firstColumn.secondColumn">
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Ref</f:facet>
+					#{item.ref}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Part Number</f:facet>
+					#{item.partNumber}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Description</f:facet>
+					#{item.description}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Quantity</f:facet>
+					#{item.quantity}
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Items In Basket</f:facet>
+					<f:ajax render="q1">
+					<h:form prependId="false">
+						<h:outputText id="q1" value="#{basketBean.getBasketQuantity(item)}"/>
+						<h:outputText value="   "/>
+						<h:commandLink action="#{basketBean.addItem(item)}">+1</h:commandLink>
+						<h:outputText value="   "/>
+						<h:commandLink action="#{basketBean.removeItem(item)}">-1</h:commandLink>
+					</h:form>
+					</f:ajax>
+				</h:column>
+				<h:column headerClass="columnHeader">
+					<f:facet name="header">Add to basket</f:facet>
+					<h:form>
+						<h:selectOneMenu value="#{basketBean.numberInBasket(item)}" onchange="submit()"
+														valueChangeListener="#{basketBean.changeCurrentItem}">
+				   			<f:selectItems value="#{basketBean.availableItems(item)}"/>
+						</h:selectOneMenu>
+					</h:form>
+				</h:column>
+			</h:dataTable>
+
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>
+

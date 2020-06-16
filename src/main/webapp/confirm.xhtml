@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<title>IGNORED</title>
+</h:head>
+
+<h:body>
+
+	<!-- Any use? -->
+	<script>
+		function submitForm(commandLinkId) {
+			var fire = document.getElementById(commandLinkId);
+			
+			if (document.createEvent) {
+				var eventObject = document.createEvent("MouseEvents");
+				eventObject.initEvent("click", true, false);
+				fire.dispatchEvent(eventObject);
+			}
+			else if (document.createEventObject) {
+				fire.fireEvent("onClick");
+			}
+			
+		}
+	</script>
+	
+	<ui:composition template="templates/masterLayout.xhtml">
+		<ui:define name="content">
+			<h3>Confirm purchase</h3>
+			
+			<h:form id="confirmPurchaseForm">
+			
+				<h:commandButton value="Confirm Purchase" 
+					onclick="if (!confirm('Confirm order?')) return false" />
+			</h:form>
+		</ui:define>
+	</ui:composition>	
+</h:body>
+</html>
